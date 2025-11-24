@@ -108,27 +108,13 @@ DB_ENGINE = config('DB_ENGINE', default='mysql')
 
 if DATABASE_URL:
     # Use DATABASE_URL (for Render with PostgreSQL)
-    # Try psycopg (newer) first, fallback to psycopg2
-    try:
-        import psycopg
-        db_config = dj_database_url.config(
+    DATABASES = {
+        'default': dj_database_url.config(
             default=DATABASE_URL,
             conn_max_age=600,
             conn_health_checks=True,
         )
-        # Use psycopg adapter for Django
-        if db_config:
-            db_config['OPTIONS'] = db_config.get('OPTIONS', {})
-        DATABASES = {'default': db_config}
-    except ImportError:
-        # Fallback to psycopg2
-        DATABASES = {
-            'default': dj_database_url.config(
-                default=DATABASE_URL,
-                conn_max_age=600,
-                conn_health_checks=True,
-            )
-        }
+    }
 else:
     # Use individual DB config (for MySQL or local)
     if DB_ENGINE == 'postgresql':
