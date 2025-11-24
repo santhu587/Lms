@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { apiRequest, getCourseContent, deleteCourseContent, markContentComplete } from '../services/api';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 import CourseContentForm from './CourseContentForm';
 import { convertToYouTubeEmbed } from '../utils/youtube';
 
 const CourseLearning = ({ userRole }) => {
   const { courseId } = useParams();
   const navigate = useNavigate();
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const [course, setCourse] = useState(null);
   const [contents, setContents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -132,18 +134,18 @@ const CourseLearning = ({ userRole }) => {
 
   return (
     <div style={styles.container}>
-      <div style={styles.header}>
+      <div style={{...styles.header, ...(isMobile && styles.headerMobile)}}>
         <button onClick={() => navigate('/dashboard')} style={styles.backButton}>
           ← Back to Courses
         </button>
         {course && (
-          <div style={styles.headerContent}>
+          <div style={{...styles.headerContent, ...(isMobile && styles.headerContentMobile)}}>
             <div>
               <h1 style={styles.courseTitle}>{course.title}</h1>
               <p style={styles.courseDescription}>{course.description}</p>
             </div>
             {userRole === 'student' && courseProgress.total > 0 && (
-              <div style={styles.progressBarContainer}>
+              <div style={{...styles.progressBarContainer, ...(isMobile && styles.progressBarContainerMobile)}}>
                 <div style={styles.progressInfo}>
                   <span style={styles.progressText}>
                     Progress: {courseProgress.completed}/{courseProgress.total} ({courseProgress.percentage}%)
@@ -163,8 +165,8 @@ const CourseLearning = ({ userRole }) => {
         )}
       </div>
 
-      <div style={styles.mainContent}>
-        <div style={styles.sidebar}>
+      <div style={{...styles.mainContent, ...(isMobile && styles.mainContentMobile)}}>
+        <div style={{...styles.sidebar, ...(isMobile && styles.sidebarMobile)}}>
           <div style={styles.sidebarHeader}>
             <h3 style={styles.sidebarTitle}>Course Content</h3>
             {userRole === 'lecturer' && (
@@ -228,7 +230,7 @@ const CourseLearning = ({ userRole }) => {
           )}
         </div>
 
-        <div style={styles.contentViewer}>
+        <div style={{...styles.contentViewer, ...(isMobile && styles.contentViewerMobile)}}>
           {selectedContent ? (
             <div>
               <h2 style={styles.contentTitle}>{selectedContent.title}</h2>
@@ -592,6 +594,33 @@ const styles = {
     padding: '1rem',
     borderRadius: '4px',
     marginBottom: '1rem',
+  },
+  // Mobile styles
+  mainContentMobile: {
+    flexDirection: 'column',
+    padding: '0 1rem',
+    gap: '1rem',
+  },
+  sidebarMobile: {
+    width: '100%',
+    maxHeight: 'none',
+    order: 2,
+  },
+  headerMobile: {
+    padding: '1rem',
+  },
+  headerContentMobile: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: '1rem',
+  },
+  progressBarContainerMobile: {
+    minWidth: '100%',
+    width: '100%',
+  },
+  contentViewerMobile: {
+    order: 1,
+    padding: '1rem',
   },
 };
 

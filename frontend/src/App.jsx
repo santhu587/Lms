@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { theme, commonStyles } from './theme';
+import { useMediaQuery } from './hooks/useMediaQuery';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -30,23 +31,24 @@ const ProtectedRoute = ({ children }) => {
 // Dashboard Component (example protected route)
 const Dashboard = () => {
   const { user, logout } = useAuth();
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
     <div style={styles.dashboard}>
-      <nav style={styles.navbar}>
-        <div style={styles.navContent}>
+      <nav style={{...styles.navbar, ...(isMobile && styles.navbarMobile)}}>
+        <div style={{...styles.navContent, ...(isMobile && styles.navContentMobile)}}>
           <div style={styles.brand}>
             <span style={styles.brandIcon}>📚</span>
             <span style={styles.brandText}>MyLearn</span>
           </div>
-          <div style={styles.userSection}>
+          <div style={{...styles.userSection, ...(isMobile && styles.userSectionMobile)}}>
             <div style={styles.userInfo}>
               <span style={styles.userName}>{user?.username}</span>
               <span style={styles.userRole}>{user?.role || 'student'}</span>
             </div>
             <button 
               onClick={logout} 
-              style={styles.logoutButton}
+              style={{...styles.logoutButton, ...(isMobile && styles.logoutButtonMobile)}}
               onMouseEnter={(e) => {
                 e.target.style.backgroundColor = theme.colors.dangerDark;
                 e.target.style.transform = 'translateY(-2px)';
@@ -61,12 +63,12 @@ const Dashboard = () => {
           </div>
         </div>
       </nav>
-      <div style={styles.dashboardContent}>
+      <div style={{...styles.dashboardContent, ...(isMobile && styles.dashboardContentMobile)}}>
         <div style={styles.welcomeSection}>
-          <h1 style={styles.welcomeTitle}>
+          <h1 style={{...styles.welcomeTitle, ...(isMobile && styles.welcomeTitleMobile)}}>
             Welcome back, {user?.username}! 👋
           </h1>
-          <p style={styles.welcomeSubtitle}>
+          <p style={{...styles.welcomeSubtitle, ...(isMobile && styles.welcomeSubtitleMobile)}}>
             {user?.role === 'lecturer' 
               ? 'Manage your courses and track student progress'
               : 'Continue your learning journey and explore new courses'}
@@ -227,6 +229,33 @@ const styles = {
     borderRadius: '50%',
     animation: 'spin 1s linear infinite',
     margin: '0 auto 1rem',
+  },
+  // Mobile styles
+  navbarMobile: {
+    padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+  },
+  navContentMobile: {
+    flexDirection: 'column',
+    gap: theme.spacing.md,
+    alignItems: 'flex-start',
+  },
+  userSectionMobile: {
+    width: '100%',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+  },
+  logoutButtonMobile: {
+    fontSize: theme.typography.fontSize.sm,
+    padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+  },
+  dashboardContentMobile: {
+    padding: theme.spacing.md,
+  },
+  welcomeTitleMobile: {
+    fontSize: theme.typography.fontSize['2xl'],
+  },
+  welcomeSubtitleMobile: {
+    fontSize: theme.typography.fontSize.base,
   },
 };
 

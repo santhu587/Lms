@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { searchCourses, getCategories, apiRequest } from '../services/api';
 import { theme, commonStyles } from '../theme';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 import CourseCard from './CourseCard';
 import CourseForm from './CourseForm';
 
@@ -11,6 +12,7 @@ const CourseList = ({ userRole }) => {
   const [error, setError] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [editingCourse, setEditingCourse] = useState(null);
+  const isMobile = useMediaQuery('(max-width: 768px)');
   
   // Search and filter states
   const [searchQuery, setSearchQuery] = useState('');
@@ -153,12 +155,12 @@ const CourseList = ({ userRole }) => {
 
       {/* Search and Filters Section */}
       {userRole === 'student' && (
-        <div style={styles.filtersSection}>
+        <div style={{...styles.filtersSection, ...(isMobile && styles.filtersSectionMobile)}}>
           <div style={styles.searchBar}>
             <span style={styles.searchIcon}>🔍</span>
             <input
               type="text"
-              placeholder="Search courses by title, description, or category..."
+              placeholder={isMobile ? "Search courses..." : "Search courses by title, description, or category..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={styles.searchInput}
@@ -173,7 +175,7 @@ const CourseList = ({ userRole }) => {
             )}
           </div>
 
-          <div style={styles.filtersRow}>
+          <div style={{...styles.filtersRow, ...(isMobile && styles.filtersRowMobile)}}>
             <div style={styles.filterGroup}>
               <label style={styles.filterLabel}>Category</label>
               <select
@@ -277,7 +279,7 @@ const CourseList = ({ userRole }) => {
           )}
         </div>
       ) : (
-        <div style={styles.courseGrid}>
+        <div style={{...styles.courseGrid, ...(isMobile && styles.courseGridMobile)}}>
           {courses.map(course => (
             <CourseCard
               key={course.id}
@@ -443,6 +445,17 @@ const styles = {
     fontSize: theme.typography.fontSize.base,
     color: theme.colors.gray,
     fontWeight: theme.typography.fontWeight.medium,
+  },
+  filtersSectionMobile: {
+    padding: theme.spacing.md,
+  },
+  filtersRowMobile: {
+    flexDirection: 'column',
+    gap: theme.spacing.md,
+  },
+  courseGridMobile: {
+    gridTemplateColumns: '1fr',
+    gap: theme.spacing.lg,
   },
 };
 

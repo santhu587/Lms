@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { theme, commonStyles } from '../theme';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -10,6 +11,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,18 +30,18 @@ const Login = () => {
   };
 
   return (
-    <div style={styles.container}>
+    <div style={{...styles.container, ...(isMobile && styles.containerMobile)}}>
       <div style={styles.backgroundPattern}></div>
-      <div style={styles.content}>
-        <div style={styles.logoSection}>
+      <div style={{...styles.content, ...(isMobile && styles.contentMobile)}}>
+        <div style={{...styles.logoSection, ...(isMobile && styles.logoSectionMobile)}}>
           <div style={styles.logo}>
             <span style={styles.logoIcon}>📚</span>
             <span style={styles.logoText}>MyLearn</span>
           </div>
-          <h1 style={styles.welcomeTitle}>Welcome Back!</h1>
-          <p style={styles.welcomeText}>Sign in to continue your learning journey</p>
+          <h1 style={{...styles.welcomeTitle, ...(isMobile && styles.welcomeTitleMobile)}}>Welcome Back!</h1>
+          <p style={{...styles.welcomeText, ...(isMobile && styles.welcomeTextMobile)}}>Sign in to continue your learning journey</p>
         </div>
-        <div style={styles.card}>
+        <div style={{...styles.card, ...(isMobile && styles.cardMobile)}}>
           <h2 style={styles.title}>Sign In</h2>
           <form onSubmit={handleSubmit} style={styles.form}>
             {error && <div style={commonStyles.error}>{error}</div>}
@@ -230,6 +232,27 @@ const styles = {
     ':hover': {
       color: theme.colors.primary,
     },
+  },
+  // Mobile styles
+  containerMobile: {
+    padding: theme.spacing.md,
+  },
+  contentMobile: {
+    gridTemplateColumns: '1fr',
+    gap: theme.spacing.xl,
+  },
+  logoSectionMobile: {
+    textAlign: 'center',
+  },
+  welcomeTitleMobile: {
+    fontSize: theme.typography.fontSize['2xl'],
+  },
+  welcomeTextMobile: {
+    fontSize: theme.typography.fontSize.base,
+  },
+  cardMobile: {
+    maxWidth: '100%',
+    padding: theme.spacing.lg,
   },
 };
 

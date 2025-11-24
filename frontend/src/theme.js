@@ -76,6 +76,18 @@ export const theme = {
     normal: '0.3s ease',
     slow: '0.5s ease',
   },
+  breakpoints: {
+    sm: '640px',
+    md: '768px',
+    lg: '1024px',
+    xl: '1280px',
+    '2xl': '1536px',
+  },
+};
+
+// Media query helper function
+export const mediaQuery = (breakpoint) => {
+  return `@media (max-width: ${theme.breakpoints[breakpoint]})`;
 };
 
 // Common component styles

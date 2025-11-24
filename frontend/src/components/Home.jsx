@@ -273,7 +273,8 @@ const Home = () => {
           </div>
         </div>
         <div style={styles.footerBottom}>
-          <p>&copy; 2024 MyLearn. All rights reserved.</p>
+          <p>&copy; 2024 MyLearn™. All rights reserved.</p>
+          <p style={styles.developerText}>Developed by <strong>santhoshchandra</strong>™</p>
         </div>
       </footer>
     </div>
@@ -292,6 +293,9 @@ const styles = {
     position: 'sticky',
     top: 0,
     zIndex: 1000,
+    '@media (max-width: 768px)': {
+      padding: '0.75rem 1rem',
+    },
   },
   navContent: {
     maxWidth: '1200px',
@@ -299,6 +303,10 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    '@media (max-width: 768px)': {
+      flexWrap: 'wrap',
+      gap: '0.5rem',
+    },
   },
   logo: {
     display: 'flex',
@@ -318,30 +326,43 @@ const styles = {
   },
   navButtons: {
     display: 'flex',
-    gap: '1rem',
+    gap: '0.5rem',
+    flexWrap: 'wrap',
   },
   loginButton: {
-    padding: '0.75rem 1.5rem',
+    padding: '0.75rem 1.25rem',
     backgroundColor: 'transparent',
     color: '#2563eb',
     border: '2px solid #2563eb',
     borderRadius: '8px',
-    fontSize: '1rem',
+    fontSize: '0.9rem',
     fontWeight: '500',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
+    minHeight: '44px',
+    '@media (max-width: 768px)': {
+      padding: '0.625rem 1rem',
+      fontSize: '0.875rem',
+      flex: '1 1 auto',
+    },
   },
   registerButton: {
-    padding: '0.75rem 1.5rem',
+    padding: '0.75rem 1.25rem',
     backgroundColor: '#2563eb',
     color: 'white',
     border: 'none',
     borderRadius: '8px',
-    fontSize: '1rem',
+    fontSize: '0.9rem',
     fontWeight: '500',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
     boxShadow: '0 2px 8px rgba(37, 99, 235, 0.3)',
+    minHeight: '44px',
+    '@media (max-width: 768px)': {
+      padding: '0.625rem 1rem',
+      fontSize: '0.875rem',
+      flex: '1 1 auto',
+    },
   },
   hero: {
     maxWidth: '1200px',
@@ -351,9 +372,19 @@ const styles = {
     alignItems: 'center',
     gap: '4rem',
     minHeight: '80vh',
+    '@media (max-width: 768px)': {
+      flexDirection: 'column',
+      padding: '2rem 1rem',
+      gap: '2rem',
+      minHeight: 'auto',
+    },
   },
   heroContent: {
     flex: 1,
+    '@media (max-width: 768px)': {
+      width: '100%',
+      textAlign: 'center',
+    },
   },
   heroTitle: {
     fontSize: '3.5rem',
@@ -364,17 +395,32 @@ const styles = {
     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
+    '@media (max-width: 768px)': {
+      fontSize: '2rem',
+      marginBottom: '1rem',
+    },
+    '@media (max-width: 480px)': {
+      fontSize: '1.75rem',
+    },
   },
   heroSubtitle: {
     fontSize: '1.25rem',
     color: '#64748b',
     marginBottom: '2rem',
     lineHeight: '1.6',
+    '@media (max-width: 768px)': {
+      fontSize: '1rem',
+      marginBottom: '1.5rem',
+    },
   },
   heroButtons: {
     display: 'flex',
     gap: '1rem',
     flexWrap: 'wrap',
+    '@media (max-width: 768px)': {
+      flexDirection: 'column',
+      width: '100%',
+    },
   },
   ctaButton: {
     padding: '1rem 2rem',
@@ -387,6 +433,12 @@ const styles = {
     cursor: 'pointer',
     transition: 'all 0.3s ease',
     boxShadow: '0 4px 14px 0 rgba(37, 99, 235, 0.39)',
+    minHeight: '48px',
+    '@media (max-width: 768px)': {
+      width: '100%',
+      padding: '0.875rem 1.5rem',
+      fontSize: '1rem',
+    },
   },
   secondaryButton: {
     padding: '1rem 2rem',
@@ -398,17 +450,30 @@ const styles = {
     fontWeight: '600',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
+    minHeight: '48px',
+    '@media (max-width: 768px)': {
+      width: '100%',
+      padding: '0.875rem 1.5rem',
+      fontSize: '1rem',
+    },
   },
   heroImage: {
     flex: 1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    '@media (max-width: 768px)': {
+      display: 'none',
+    },
   },
   illustration: {
     position: 'relative',
     width: '400px',
     height: '400px',
+    '@media (max-width: 768px)': {
+      width: '300px',
+      height: '300px',
+    },
   },
   icon1: {
     position: 'absolute',
@@ -441,6 +506,9 @@ const styles = {
   features: {
     backgroundColor: '#f8fafc',
     padding: '5rem 2rem',
+    '@media (max-width: 768px)': {
+      padding: '3rem 1rem',
+    },
   },
   sectionTitle: {
     textAlign: 'center',
@@ -448,6 +516,13 @@ const styles = {
     fontWeight: 'bold',
     color: '#1e293b',
     marginBottom: '3rem',
+    '@media (max-width: 768px)': {
+      fontSize: '1.75rem',
+      marginBottom: '2rem',
+    },
+    '@media (max-width: 480px)': {
+      fontSize: '1.5rem',
+    },
   },
   featuresGrid: {
     maxWidth: '1200px',
@@ -455,6 +530,10 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
     gap: '2rem',
+    '@media (max-width: 768px)': {
+      gridTemplateColumns: '1fr',
+      gap: '1.5rem',
+    },
   },
   featureCard: {
     backgroundColor: 'white',
@@ -463,6 +542,9 @@ const styles = {
     boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
     textAlign: 'center',
     transition: 'transform 0.3s ease',
+    '@media (max-width: 768px)': {
+      padding: '1.5rem',
+    },
   },
   featureIcon: {
     fontSize: '3rem',
@@ -482,12 +564,20 @@ const styles = {
     maxWidth: '1200px',
     margin: '0 auto',
     padding: '5rem 2rem',
+    '@media (max-width: 768px)': {
+      padding: '3rem 1rem',
+    },
   },
   stepsContainer: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
     gap: '2rem',
     marginTop: '3rem',
+    '@media (max-width: 768px)': {
+      gridTemplateColumns: '1fr',
+      gap: '1.5rem',
+      marginTop: '2rem',
+    },
   },
   step: {
     textAlign: 'center',
@@ -522,6 +612,9 @@ const styles = {
     padding: '5rem 2rem',
     textAlign: 'center',
     color: 'white',
+    '@media (max-width: 768px)': {
+      padding: '3rem 1rem',
+    },
   },
   ctaContent: {
     maxWidth: '800px',
@@ -531,17 +624,30 @@ const styles = {
     fontSize: '2.5rem',
     fontWeight: 'bold',
     marginBottom: '1rem',
+    '@media (max-width: 768px)': {
+      fontSize: '1.75rem',
+    },
+    '@media (max-width: 480px)': {
+      fontSize: '1.5rem',
+    },
   },
   ctaText: {
     fontSize: '1.25rem',
     marginBottom: '2rem',
     opacity: 0.9,
+    '@media (max-width: 768px)': {
+      fontSize: '1rem',
+      marginBottom: '1.5rem',
+    },
   },
   ctaButtons: {
     display: 'flex',
     gap: '1rem',
     justifyContent: 'center',
     flexWrap: 'wrap',
+    '@media (max-width: 768px)': {
+      flexDirection: 'column',
+    },
   },
   ctaButtonLarge: {
     padding: '1.25rem 2.5rem',
@@ -553,6 +659,12 @@ const styles = {
     fontWeight: '600',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
+    minHeight: '48px',
+    '@media (max-width: 768px)': {
+      width: '100%',
+      padding: '1rem 1.5rem',
+      fontSize: '1rem',
+    },
   },
   secondaryButtonLarge: {
     padding: '1.25rem 2.5rem',
@@ -564,11 +676,20 @@ const styles = {
     fontWeight: '600',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
+    minHeight: '48px',
+    '@media (max-width: 768px)': {
+      width: '100%',
+      padding: '1rem 1.5rem',
+      fontSize: '1rem',
+    },
   },
   footer: {
     backgroundColor: '#1e293b',
     color: 'white',
     padding: '3rem 2rem 1rem',
+    '@media (max-width: 768px)': {
+      padding: '2rem 1rem 1rem',
+    },
   },
   footerContent: {
     maxWidth: '1200px',
@@ -577,6 +698,10 @@ const styles = {
     gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
     gap: '2rem',
     marginBottom: '2rem',
+    '@media (max-width: 768px)': {
+      gridTemplateColumns: '1fr',
+      gap: '1.5rem',
+    },
   },
   footerSection: {
     marginBottom: '1rem',
@@ -611,6 +736,18 @@ const styles = {
     borderTop: '1px solid #334155',
     textAlign: 'center',
     color: '#cbd5e1',
+    '@media (max-width: 768px)': {
+      paddingTop: '1.5rem',
+    },
+  },
+  developerText: {
+    marginTop: '0.75rem',
+    fontSize: '0.9rem',
+    color: '#94a3b8',
+    '@media (max-width: 768px)': {
+      fontSize: '0.85rem',
+      marginTop: '0.5rem',
+    },
   },
 };
 

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { theme, commonStyles } from '../theme';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 import { enrollInCourse } from '../services/api';
 
 const CourseCard = ({ course, userRole, onEdit, onDelete, onEnroll }) => {
   const [enrolling, setEnrolling] = useState(false);
   const navigate = useNavigate();
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const isEnrolled = course.is_enrolled;
 
   const handleBuy = async () => {
@@ -68,7 +70,7 @@ const CourseCard = ({ course, userRole, onEdit, onDelete, onEnroll }) => {
             ? `${course.description.substring(0, 120)}...`
             : course.description}
         </p>
-        <div style={styles.metaInfo}>
+        <div style={{...styles.metaInfo, ...(isMobile && styles.metaInfoMobile)}}>
           {course.difficulty && (
             <span style={{
               ...styles.difficultyBadge,
@@ -438,6 +440,11 @@ const styles = {
     fontWeight: theme.typography.fontWeight.semibold,
     transition: theme.transitions.normal,
     boxShadow: theme.shadows.primary,
+  },
+  // Mobile styles
+  metaInfoMobile: {
+    flexWrap: 'wrap',
+    gap: theme.spacing.xs,
   },
 };
 
