@@ -108,13 +108,16 @@ DB_ENGINE = config('DB_ENGINE', default='mysql')
 
 if DATABASE_URL:
     # Use DATABASE_URL (for Render with PostgreSQL)
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=DATABASE_URL,
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
-    }
+    # Django 5.2 automatically uses psycopg (v3) if available, falls back to psycopg2
+    db_config = dj_database_url.config(
+        default=DATABASE_URL,
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+    # Ensure we're using postgresql backend (works with both psycopg and psycopg2)
+    if db_config:
+        db_config['ENGINE'] = 'django.db.backends.postgresql'
+    DATABASES = {'default': db_config}
 else:
     # Use individual DB config (for MySQL or local)
     if DB_ENGINE == 'postgresql':
