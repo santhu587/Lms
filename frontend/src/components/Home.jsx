@@ -1,14 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 const Home = () => {
   const navigate = useNavigate();
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
     <div style={styles.container}>
       {/* Navigation Bar */}
-      <nav style={styles.navbar}>
-        <div style={styles.navContent}>
+      <nav style={{...styles.navbar, ...(isMobile && styles.navbarMobile)}}>
+        <div style={{...styles.navContent, ...(isMobile && styles.navContentMobile)}}>
           <div style={styles.logo}>
             <span style={styles.logoIcon}>📚</span>
             <span style={styles.logoText}>MyLearn</span>
@@ -16,7 +18,7 @@ const Home = () => {
           <div style={styles.navButtons}>
             <button 
               onClick={() => navigate('/login')} 
-              style={styles.loginButton}
+              style={{...styles.loginButton, ...(isMobile && styles.loginButtonMobile)}}
               onMouseEnter={(e) => {
                 e.target.style.backgroundColor = '#2563eb';
                 e.target.style.color = 'white';
@@ -30,7 +32,7 @@ const Home = () => {
             </button>
             <button 
               onClick={() => navigate('/register')} 
-              style={styles.registerButton}
+              style={{...styles.registerButton, ...(isMobile && styles.registerButtonMobile)}}
               onMouseEnter={(e) => {
                 e.target.style.transform = 'translateY(-2px)';
                 e.target.style.boxShadow = '0 4px 12px rgba(37, 99, 235, 0.4)';
@@ -47,31 +49,31 @@ const Home = () => {
       </nav>
 
       {/* Hero Section */}
-      <section style={styles.hero}>
-        <div style={styles.heroContent}>
-          <h1 style={styles.heroTitle}>
+      <section style={{...styles.hero, ...(isMobile && styles.heroMobile)}}>
+        <div style={{...styles.heroContent, ...(isMobile && styles.heroContentMobile)}}>
+          <h1 style={{...styles.heroTitle, ...(isMobile && styles.heroTitleMobile)}}>
             Learn Anything, Anytime, Anywhere
           </h1>
-          <p style={styles.heroSubtitle}>
+          <p style={{...styles.heroSubtitle, ...(isMobile && styles.heroSubtitleMobile)}}>
             Join thousands of students and instructors in our modern learning platform.
             Access courses, track your progress, and achieve your learning goals.
           </p>
-          <div style={styles.heroButtons}>
+          <div style={{...styles.heroButtons, ...(isMobile && styles.heroButtonsMobile)}}>
             <button 
               onClick={() => navigate('/register')} 
-              style={styles.ctaButton}
+              style={{...styles.ctaButton, ...(isMobile && styles.ctaButtonMobile)}}
             >
               Start Learning Free
             </button>
             <button 
               onClick={() => navigate('/login')} 
-              style={styles.secondaryButton}
+              style={{...styles.secondaryButton, ...(isMobile && styles.secondaryButtonMobile)}}
             >
               Sign In
             </button>
           </div>
         </div>
-        <div style={styles.heroImage}>
+        <div style={{...styles.heroImage, ...(isMobile && styles.heroImageMobile)}}>
           <div style={styles.illustration}>
             <div style={styles.icon1}>🎓</div>
             <div style={styles.icon2}>📖</div>
@@ -82,9 +84,9 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section style={styles.features}>
-        <h2 style={styles.sectionTitle}>Why Choose MyLearn?</h2>
-        <div style={styles.featuresGrid}>
+      <section style={{...styles.features, ...(isMobile && styles.featuresMobile)}}>
+        <h2 style={{...styles.sectionTitle, ...(isMobile && styles.sectionTitleMobile)}}>Why Choose MyLearn?</h2>
+        <div style={{...styles.featuresGrid, ...(isMobile && styles.featuresGridMobile)}}>
           <div 
             style={styles.featureCard}
             onMouseEnter={(e) => {
@@ -191,9 +193,9 @@ const Home = () => {
       </section>
 
       {/* How It Works Section */}
-      <section style={styles.howItWorks}>
-        <h2 style={styles.sectionTitle}>How It Works</h2>
-        <div style={styles.stepsContainer}>
+      <section style={{...styles.howItWorks, ...(isMobile && styles.howItWorksMobile)}}>
+        <h2 style={{...styles.sectionTitle, ...(isMobile && styles.sectionTitleMobile)}}>How It Works</h2>
+        <div style={{...styles.stepsContainer, ...(isMobile && styles.stepsContainerMobile)}}>
           <div style={styles.step}>
             <div style={styles.stepNumber}>1</div>
             <h3 style={styles.stepTitle}>Sign Up</h3>
@@ -226,22 +228,22 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section style={styles.ctaSection}>
+      <section style={{...styles.ctaSection, ...(isMobile && styles.ctaSectionMobile)}}>
         <div style={styles.ctaContent}>
-          <h2 style={styles.ctaTitle}>Ready to Start Your Learning Journey?</h2>
-          <p style={styles.ctaText}>
+          <h2 style={{...styles.ctaTitle, ...(isMobile && styles.ctaTitleMobile)}}>Ready to Start Your Learning Journey?</h2>
+          <p style={{...styles.ctaText, ...(isMobile && styles.ctaTextMobile)}}>
             Join thousands of learners who are already advancing their skills with MyLearn.
           </p>
-          <div style={styles.ctaButtons}>
+          <div style={{...styles.ctaButtons, ...(isMobile && styles.ctaButtonsMobile)}}>
             <button 
               onClick={() => navigate('/register')} 
-              style={styles.ctaButtonLarge}
+              style={{...styles.ctaButtonLarge, ...(isMobile && styles.ctaButtonLargeMobile)}}
             >
               Get Started for Free
             </button>
             <button 
               onClick={() => navigate('/login')} 
-              style={styles.secondaryButtonLarge}
+              style={{...styles.secondaryButtonLarge, ...(isMobile && styles.secondaryButtonLargeMobile)}}
             >
               Already have an account? Sign In
             </button>
@@ -250,8 +252,8 @@ const Home = () => {
       </section>
 
       {/* Footer */}
-      <footer style={styles.footer}>
-        <div style={styles.footerContent}>
+      <footer style={{...styles.footer, ...(isMobile && styles.footerMobile)}}>
+        <div style={{...styles.footerContent, ...(isMobile && styles.footerContentMobile)}}>
           <div style={styles.footerSection}>
             <h4 style={styles.footerTitle}>MyLearn</h4>
             <p style={styles.footerText}>
@@ -272,9 +274,9 @@ const Home = () => {
             <p style={styles.footerText}>Expert Instructors</p>
           </div>
         </div>
-        <div style={styles.footerBottom}>
+        <div style={{...styles.footerBottom, ...(isMobile && styles.footerBottomMobile)}}>
           <p>&copy; 2024 MyLearn™. All rights reserved.</p>
-          <p style={styles.developerText}>Developed by <strong>santhoshchandra</strong>™</p>
+          <p style={{...styles.developerText, ...(isMobile && styles.developerTextMobile)}}>Developed by <strong>santhoshchandra</strong>™</p>
         </div>
       </footer>
     </div>
@@ -293,9 +295,9 @@ const styles = {
     position: 'sticky',
     top: 0,
     zIndex: 1000,
-    '@media (max-width: 768px)': {
-      padding: '0.75rem 1rem',
-    },
+  },
+  navbarMobile: {
+    padding: '0.75rem 1rem',
   },
   navContent: {
     maxWidth: '1200px',
@@ -303,10 +305,10 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    '@media (max-width: 768px)': {
-      flexWrap: 'wrap',
-      gap: '0.5rem',
-    },
+  },
+  navContentMobile: {
+    flexWrap: 'wrap',
+    gap: '0.5rem',
   },
   logo: {
     display: 'flex',
@@ -340,11 +342,11 @@ const styles = {
     cursor: 'pointer',
     transition: 'all 0.3s ease',
     minHeight: '44px',
-    '@media (max-width: 768px)': {
-      padding: '0.625rem 1rem',
-      fontSize: '0.875rem',
-      flex: '1 1 auto',
-    },
+  },
+  loginButtonMobile: {
+    padding: '0.625rem 1rem',
+    fontSize: '0.875rem',
+    flex: '1 1 auto',
   },
   registerButton: {
     padding: '0.75rem 1.25rem',
@@ -358,11 +360,11 @@ const styles = {
     transition: 'all 0.3s ease',
     boxShadow: '0 2px 8px rgba(37, 99, 235, 0.3)',
     minHeight: '44px',
-    '@media (max-width: 768px)': {
-      padding: '0.625rem 1rem',
-      fontSize: '0.875rem',
-      flex: '1 1 auto',
-    },
+  },
+  registerButtonMobile: {
+    padding: '0.625rem 1rem',
+    fontSize: '0.875rem',
+    flex: '1 1 auto',
   },
   hero: {
     maxWidth: '1200px',
@@ -372,19 +374,19 @@ const styles = {
     alignItems: 'center',
     gap: '4rem',
     minHeight: '80vh',
-    '@media (max-width: 768px)': {
-      flexDirection: 'column',
-      padding: '2rem 1rem',
-      gap: '2rem',
-      minHeight: 'auto',
-    },
+  },
+  heroMobile: {
+    flexDirection: 'column',
+    padding: '2rem 1rem',
+    gap: '2rem',
+    minHeight: 'auto',
   },
   heroContent: {
     flex: 1,
-    '@media (max-width: 768px)': {
-      width: '100%',
-      textAlign: 'center',
-    },
+  },
+  heroContentMobile: {
+    width: '100%',
+    textAlign: 'center',
   },
   heroTitle: {
     fontSize: '3.5rem',
@@ -395,32 +397,29 @@ const styles = {
     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
-    '@media (max-width: 768px)': {
-      fontSize: '2rem',
-      marginBottom: '1rem',
-    },
-    '@media (max-width: 480px)': {
-      fontSize: '1.75rem',
-    },
+  },
+  heroTitleMobile: {
+    fontSize: '2rem',
+    marginBottom: '1rem',
   },
   heroSubtitle: {
     fontSize: '1.25rem',
     color: '#64748b',
     marginBottom: '2rem',
     lineHeight: '1.6',
-    '@media (max-width: 768px)': {
-      fontSize: '1rem',
-      marginBottom: '1.5rem',
-    },
+  },
+  heroSubtitleMobile: {
+    fontSize: '1rem',
+    marginBottom: '1.5rem',
   },
   heroButtons: {
     display: 'flex',
     gap: '1rem',
     flexWrap: 'wrap',
-    '@media (max-width: 768px)': {
-      flexDirection: 'column',
-      width: '100%',
-    },
+  },
+  heroButtonsMobile: {
+    flexDirection: 'column',
+    width: '100%',
   },
   ctaButton: {
     padding: '1rem 2rem',
@@ -434,11 +433,11 @@ const styles = {
     transition: 'all 0.3s ease',
     boxShadow: '0 4px 14px 0 rgba(37, 99, 235, 0.39)',
     minHeight: '48px',
-    '@media (max-width: 768px)': {
-      width: '100%',
-      padding: '0.875rem 1.5rem',
-      fontSize: '1rem',
-    },
+  },
+  ctaButtonMobile: {
+    width: '100%',
+    padding: '0.875rem 1.5rem',
+    fontSize: '1rem',
   },
   secondaryButton: {
     padding: '1rem 2rem',
@@ -451,20 +450,20 @@ const styles = {
     cursor: 'pointer',
     transition: 'all 0.3s ease',
     minHeight: '48px',
-    '@media (max-width: 768px)': {
-      width: '100%',
-      padding: '0.875rem 1.5rem',
-      fontSize: '1rem',
-    },
+  },
+  secondaryButtonMobile: {
+    width: '100%',
+    padding: '0.875rem 1.5rem',
+    fontSize: '1rem',
   },
   heroImage: {
     flex: 1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    '@media (max-width: 768px)': {
-      display: 'none',
-    },
+  },
+  heroImageMobile: {
+    display: 'none',
   },
   illustration: {
     position: 'relative',
@@ -506,9 +505,9 @@ const styles = {
   features: {
     backgroundColor: '#f8fafc',
     padding: '5rem 2rem',
-    '@media (max-width: 768px)': {
-      padding: '3rem 1rem',
-    },
+  },
+  featuresMobile: {
+    padding: '3rem 1rem',
   },
   sectionTitle: {
     textAlign: 'center',
@@ -516,13 +515,10 @@ const styles = {
     fontWeight: 'bold',
     color: '#1e293b',
     marginBottom: '3rem',
-    '@media (max-width: 768px)': {
-      fontSize: '1.75rem',
-      marginBottom: '2rem',
-    },
-    '@media (max-width: 480px)': {
-      fontSize: '1.5rem',
-    },
+  },
+  sectionTitleMobile: {
+    fontSize: '1.75rem',
+    marginBottom: '2rem',
   },
   featuresGrid: {
     maxWidth: '1200px',
@@ -530,10 +526,10 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
     gap: '2rem',
-    '@media (max-width: 768px)': {
-      gridTemplateColumns: '1fr',
-      gap: '1.5rem',
-    },
+  },
+  featuresGridMobile: {
+    gridTemplateColumns: '1fr',
+    gap: '1.5rem',
   },
   featureCard: {
     backgroundColor: 'white',
@@ -542,9 +538,6 @@ const styles = {
     boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
     textAlign: 'center',
     transition: 'transform 0.3s ease',
-    '@media (max-width: 768px)': {
-      padding: '1.5rem',
-    },
   },
   featureIcon: {
     fontSize: '3rem',
@@ -564,20 +557,20 @@ const styles = {
     maxWidth: '1200px',
     margin: '0 auto',
     padding: '5rem 2rem',
-    '@media (max-width: 768px)': {
-      padding: '3rem 1rem',
-    },
+  },
+  howItWorksMobile: {
+    padding: '3rem 1rem',
   },
   stepsContainer: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
     gap: '2rem',
     marginTop: '3rem',
-    '@media (max-width: 768px)': {
-      gridTemplateColumns: '1fr',
-      gap: '1.5rem',
-      marginTop: '2rem',
-    },
+  },
+  stepsContainerMobile: {
+    gridTemplateColumns: '1fr',
+    gap: '1.5rem',
+    marginTop: '2rem',
   },
   step: {
     textAlign: 'center',
@@ -612,9 +605,9 @@ const styles = {
     padding: '5rem 2rem',
     textAlign: 'center',
     color: 'white',
-    '@media (max-width: 768px)': {
-      padding: '3rem 1rem',
-    },
+  },
+  ctaSectionMobile: {
+    padding: '3rem 1rem',
   },
   ctaContent: {
     maxWidth: '800px',
@@ -624,30 +617,27 @@ const styles = {
     fontSize: '2.5rem',
     fontWeight: 'bold',
     marginBottom: '1rem',
-    '@media (max-width: 768px)': {
-      fontSize: '1.75rem',
-    },
-    '@media (max-width: 480px)': {
-      fontSize: '1.5rem',
-    },
+  },
+  ctaTitleMobile: {
+    fontSize: '1.75rem',
   },
   ctaText: {
     fontSize: '1.25rem',
     marginBottom: '2rem',
     opacity: 0.9,
-    '@media (max-width: 768px)': {
-      fontSize: '1rem',
-      marginBottom: '1.5rem',
-    },
+  },
+  ctaTextMobile: {
+    fontSize: '1rem',
+    marginBottom: '1.5rem',
   },
   ctaButtons: {
     display: 'flex',
     gap: '1rem',
     justifyContent: 'center',
     flexWrap: 'wrap',
-    '@media (max-width: 768px)': {
-      flexDirection: 'column',
-    },
+  },
+  ctaButtonsMobile: {
+    flexDirection: 'column',
   },
   ctaButtonLarge: {
     padding: '1.25rem 2.5rem',
@@ -660,11 +650,11 @@ const styles = {
     cursor: 'pointer',
     transition: 'all 0.3s ease',
     minHeight: '48px',
-    '@media (max-width: 768px)': {
-      width: '100%',
-      padding: '1rem 1.5rem',
-      fontSize: '1rem',
-    },
+  },
+  ctaButtonLargeMobile: {
+    width: '100%',
+    padding: '1rem 1.5rem',
+    fontSize: '1rem',
   },
   secondaryButtonLarge: {
     padding: '1.25rem 2.5rem',
@@ -677,19 +667,19 @@ const styles = {
     cursor: 'pointer',
     transition: 'all 0.3s ease',
     minHeight: '48px',
-    '@media (max-width: 768px)': {
-      width: '100%',
-      padding: '1rem 1.5rem',
-      fontSize: '1rem',
-    },
+  },
+  secondaryButtonLargeMobile: {
+    width: '100%',
+    padding: '1rem 1.5rem',
+    fontSize: '1rem',
   },
   footer: {
     backgroundColor: '#1e293b',
     color: 'white',
     padding: '3rem 2rem 1rem',
-    '@media (max-width: 768px)': {
-      padding: '2rem 1rem 1rem',
-    },
+  },
+  footerMobile: {
+    padding: '2rem 1rem 1rem',
   },
   footerContent: {
     maxWidth: '1200px',
@@ -698,10 +688,10 @@ const styles = {
     gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
     gap: '2rem',
     marginBottom: '2rem',
-    '@media (max-width: 768px)': {
-      gridTemplateColumns: '1fr',
-      gap: '1.5rem',
-    },
+  },
+  footerContentMobile: {
+    gridTemplateColumns: '1fr',
+    gap: '1.5rem',
   },
   footerSection: {
     marginBottom: '1rem',
@@ -736,18 +726,18 @@ const styles = {
     borderTop: '1px solid #334155',
     textAlign: 'center',
     color: '#cbd5e1',
-    '@media (max-width: 768px)': {
-      paddingTop: '1.5rem',
-    },
+  },
+  footerBottomMobile: {
+    paddingTop: '1.5rem',
   },
   developerText: {
     marginTop: '0.75rem',
     fontSize: '0.9rem',
     color: '#94a3b8',
-    '@media (max-width: 768px)': {
-      fontSize: '0.85rem',
-      marginTop: '0.5rem',
-    },
+  },
+  developerTextMobile: {
+    fontSize: '0.85rem',
+    marginTop: '0.5rem',
   },
 };
 
