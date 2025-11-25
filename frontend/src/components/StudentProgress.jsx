@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 import { apiRequest, getCourseStudentProgress } from '../services/api';
 
 const StudentProgress = () => {
   const { courseId } = useParams();
   const navigate = useNavigate();
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const [course, setCourse] = useState(null);
   const [studentProgress, setStudentProgress] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -50,15 +52,15 @@ const StudentProgress = () => {
   }
 
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
+    <div style={{...styles.container, ...(isMobile && styles.containerMobile)}}>
+      <div style={{...styles.header, ...(isMobile && styles.headerMobile)}}>
         <button onClick={() => navigate('/dashboard')} style={styles.backButton}>
           ← Back to Courses
         </button>
         {course && (
           <div>
-            <h1 style={styles.courseTitle}>{course.title}</h1>
-            <p style={styles.subtitle}>
+            <h1 style={{...styles.courseTitle, ...(isMobile && styles.courseTitleMobile)}}>{course.title}</h1>
+            <p style={{...styles.subtitle, ...(isMobile && styles.subtitleMobile)}}>
               Student Progress Overview ({studentProgress.length} {studentProgress.length === 1 ? 'student' : 'students'})
             </p>
           </div>
@@ -72,20 +74,20 @@ const StudentProgress = () => {
       ) : (
         <div style={styles.progressList}>
           {studentProgress.map((student) => (
-            <div key={student.student_id} style={styles.studentCard}>
-              <div style={styles.studentHeader}>
+            <div key={student.student_id} style={{...styles.studentCard, ...(isMobile && styles.studentCardMobile)}}>
+              <div style={{...styles.studentHeader, ...(isMobile && styles.studentHeaderMobile)}}>
                 <div>
-                  <h3 style={styles.studentName}>{student.student_name}</h3>
-                  <p style={styles.studentEmail}>{student.student_email}</p>
-                  <p style={styles.enrolledDate}>
+                  <h3 style={{...styles.studentName, ...(isMobile && styles.studentNameMobile)}}>{student.student_name}</h3>
+                  <p style={{...styles.studentEmail, ...(isMobile && styles.studentEmailMobile)}}>{student.student_email}</p>
+                  <p style={{...styles.enrolledDate, ...(isMobile && styles.enrolledDateMobile)}}>
                     Enrolled: {new Date(student.enrolled_at).toLocaleDateString()}
                   </p>
                 </div>
-                <div style={styles.progressSummary}>
-                  <div style={styles.progressPercentage}>
+                <div style={{...styles.progressSummary, ...(isMobile && styles.progressSummaryMobile)}}>
+                  <div style={{...styles.progressPercentage, ...(isMobile && styles.progressPercentageMobile)}}>
                     {student.progress_percentage}%
                   </div>
-                  <div style={styles.progressText}>
+                  <div style={{...styles.progressText, ...(isMobile && styles.progressTextMobile)}}>
                     {student.completed_content} / {student.total_content} completed
                   </div>
                   <div style={styles.progressBar}>
@@ -100,7 +102,7 @@ const StudentProgress = () => {
               </div>
 
               <div style={styles.contentProgress}>
-                <h4 style={styles.contentProgressTitle}>Content Progress:</h4>
+                <h4 style={{...styles.contentProgressTitle, ...(isMobile && styles.contentProgressTitleMobile)}}>Content Progress:</h4>
                 <div style={styles.contentList}>
                   {student.content_progress.map((content) => (
                     <div
@@ -108,16 +110,17 @@ const StudentProgress = () => {
                       style={{
                         ...styles.contentItem,
                         ...(content.completed ? styles.contentCompleted : {}),
+                        ...(isMobile && styles.contentItemMobile),
                       }}
                     >
-                      <span style={styles.contentTitle}>{content.content_title}</span>
+                      <span style={{...styles.contentTitle, ...(isMobile && styles.contentTitleMobile)}}>{content.content_title}</span>
                       {content.completed ? (
-                        <span style={styles.completedBadge}>
+                        <span style={{...styles.completedBadge, ...(isMobile && styles.completedBadgeMobile)}}>
                           ✓ Completed {content.completed_at && 
                             `on ${new Date(content.completed_at).toLocaleDateString()}`}
                         </span>
                       ) : (
-                        <span style={styles.incompleteBadge}>Not completed</span>
+                        <span style={{...styles.incompleteBadge, ...(isMobile && styles.incompleteBadgeMobile)}}>Not completed</span>
                       )}
                     </div>
                   ))}
@@ -279,6 +282,64 @@ const styles = {
     padding: '1rem',
     borderRadius: '4px',
     marginBottom: '1rem',
+  },
+  // Mobile styles
+  containerMobile: {
+    padding: '1rem',
+  },
+  headerMobile: {
+    padding: '1rem',
+  },
+  courseTitleMobile: {
+    fontSize: '1.5rem',
+  },
+  subtitleMobile: {
+    fontSize: '0.9rem',
+  },
+  studentCardMobile: {
+    padding: '1rem',
+  },
+  studentHeaderMobile: {
+    flexDirection: 'column',
+    gap: '1rem',
+    alignItems: 'flex-start',
+  },
+  studentNameMobile: {
+    fontSize: '1.1rem',
+  },
+  studentEmailMobile: {
+    fontSize: '0.85rem',
+  },
+  enrolledDateMobile: {
+    fontSize: '0.8rem',
+  },
+  progressSummaryMobile: {
+    textAlign: 'left',
+    minWidth: '100%',
+    width: '100%',
+  },
+  progressPercentageMobile: {
+    fontSize: '1.5rem',
+  },
+  progressTextMobile: {
+    fontSize: '0.85rem',
+  },
+  contentProgressTitleMobile: {
+    fontSize: '1rem',
+  },
+  contentItemMobile: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: '0.5rem',
+  },
+  contentTitleMobile: {
+    fontSize: '0.9rem',
+  },
+  completedBadgeMobile: {
+    fontSize: '0.85rem',
+  },
+  incompleteBadgeMobile: {
+    fontSize: '0.85rem',
   },
 };
 

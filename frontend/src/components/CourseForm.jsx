@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { theme, commonStyles } from '../theme';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 import { apiRequest, getCategories } from '../services/api';
 
 const CourseForm = ({ course, onClose, onSuccess }) => {
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -87,10 +89,10 @@ const CourseForm = ({ course, onClose, onSuccess }) => {
   };
 
   return (
-    <div style={styles.overlay}>
-      <div style={styles.modal}>
-        <div style={styles.header}>
-          <h2>{course ? 'Edit Course' : 'Create New Course'}</h2>
+    <div style={{...styles.overlay, ...(isMobile && styles.overlayMobile)}}>
+      <div style={{...styles.modal, ...(isMobile && styles.modalMobile)}}>
+        <div style={{...styles.header, ...(isMobile && styles.headerMobile)}}>
+          <h2 style={isMobile ? styles.titleMobile : {}}>{course ? 'Edit Course' : 'Create New Course'}</h2>
           <button 
             onClick={onClose} 
             style={styles.closeButton}
@@ -107,7 +109,7 @@ const CourseForm = ({ course, onClose, onSuccess }) => {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} style={styles.form}>
+        <form onSubmit={handleSubmit} style={{...styles.form, ...(isMobile && styles.formMobile)}}>
           {error && <div style={styles.error}>{error}</div>}
 
           <div style={styles.inputGroup}>
@@ -224,7 +226,7 @@ const CourseForm = ({ course, onClose, onSuccess }) => {
             </label>
           </div>
 
-          <div style={styles.actions}>
+          <div style={{...styles.actions, ...(isMobile && styles.actionsMobile)}}>
             <button type="button" onClick={onClose} style={styles.cancelButton}>
               Cancel
             </button>
@@ -349,6 +351,31 @@ const styles = {
   select: {
     ...commonStyles.input,
     cursor: 'pointer',
+  },
+  // Mobile styles
+  overlayMobile: {
+    padding: theme.spacing.md,
+  },
+  modalMobile: {
+    maxWidth: '100%',
+    maxHeight: '95vh',
+    borderRadius: theme.borderRadius.lg,
+  },
+  headerMobile: {
+    padding: theme.spacing.lg,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: theme.spacing.sm,
+  },
+  titleMobile: {
+    fontSize: theme.typography.fontSize.xl,
+  },
+  formMobile: {
+    padding: theme.spacing.lg,
+  },
+  actionsMobile: {
+    flexDirection: 'column',
+    gap: theme.spacing.sm,
   },
 };
 
