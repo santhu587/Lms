@@ -275,8 +275,13 @@ const Home = () => {
           </div>
         </div>
         <div style={{...styles.footerBottom, ...(isMobile && styles.footerBottomMobile)}}>
-          <p>&copy; 2024 MyLearn™. All rights reserved.</p>
-          <p style={{...styles.developerText, ...(isMobile && styles.developerTextMobile)}}>Developed by <strong>santhoshchandra</strong>™</p>
+          <div style={{...styles.footerBottomContent, ...(isMobile && styles.footerBottomContentMobile)}}>
+            <p style={styles.copyright}>&copy; 2024 MyLearn™. All rights reserved.</p>
+            <div style={{...styles.developerSection, ...(isMobile && styles.developerSectionMobile)}}>
+              <p style={styles.developedBy}>Developed by</p>
+              <p style={styles.developerName}>Santhosh Chandra</p>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
@@ -724,20 +729,53 @@ const styles = {
     margin: '0 auto',
     paddingTop: '2rem',
     borderTop: '1px solid #334155',
-    textAlign: 'center',
     color: '#cbd5e1',
   },
   footerBottomMobile: {
     paddingTop: '1.5rem',
   },
-  developerText: {
-    marginTop: '0.75rem',
-    fontSize: '0.9rem',
-    color: '#94a3b8',
+  footerBottomContent: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: '1rem',
   },
-  developerTextMobile: {
+  copyright: {
+    fontSize: '0.9rem',
+    color: '#cbd5e1',
+    margin: 0,
+  },
+  developerSection: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    gap: '0.25rem',
+  },
+  developedBy: {
     fontSize: '0.85rem',
-    marginTop: '0.5rem',
+    color: '#94a3b8',
+    margin: 0,
+    fontStyle: 'italic',
+  },
+  developerName: {
+    fontSize: '1rem',
+    fontWeight: '600',
+    color: '#ffffff',
+    margin: 0,
+    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    letterSpacing: '0.5px',
+  },
+  // Mobile styles for footer bottom
+  footerBottomContentMobile: {
+    flexDirection: 'column',
+    textAlign: 'center',
+    gap: '1rem',
+  },
+  developerSectionMobile: {
+    alignItems: 'center',
   },
 };
 
